@@ -1,0 +1,263 @@
+/* --- CONFIGURACIÓN MAESTRA --- */
+:root {
+  --fondo-crema: #f7f7eb;
+  --azul-suave: #a4d2f7;
+  --verde-relajante: #57a45c;
+  --texto-oscuro: #333333;
+  --blanco: #ffffff;
+  --sombra: rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--fondo-crema);
+  color: var(--texto-oscuro);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6; /* Mejora la lectura para personas con dislexia */
+}
+
+header {
+  background-color: var(--azul-suave);
+  color: var(--blanco);
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px var(--sombra);
+}
+
+/* --- CONTENEDORES --- */
+.grid-container {
+  max-width: 1000px; /* Un poco más ancho para dar aire al diseño */
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.titulo-principal {
+  text-align: center;
+  color: #4a6572;
+  margin-bottom: 40px;
+}
+
+/* --- TARJETAS DE CONTENIDO (Secciones de trastornos o info) --- */
+.tarjeta-trastorno {
+  background-color: var(--blanco);
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 15px; /* Bordes más redondeados son más amigables */
+  overflow: hidden;
+  box-shadow: 0 4px 15px var(--sombra);
+  border: 1px solid #eef2f5;
+  transition: transform 0.2s ease;
+}
+
+.tarjeta-trastorno:hover {
+  transform: translateY(-5px); /* Un pequeño efecto de flotación */
+}
+
+/* Imagen a la izquierda */
+.imagen-lado {
+  flex: 0 0 350px; /* Aumentado un poco para mejor visibilidad */
+}
+
+.imagen-lado img {
+  width: 100%;
+  height: 250px; /* Altura uniforme */
+  object-fit: cover;
+  display: block;
+}
+
+/* Texto a la derecha */
+.texto-lado {
+  padding: 30px;
+  flex: 1;
+}
+
+.texto-lado h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+/* --- BOTONES Y NAVEGACIÓN --- */
+.seccion-botones {
+  margin: 50px 0;
+}
+
+.dos-columnas {
+  display: flex;
+  justify-content: space-around; /* Mejor distribución */
+  gap: 20px;
+}
+
+.btn {
+  padding: 15px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--verde-relajante);
+  color: var(--blanco);
+  border: none;
+  border-radius: 50px; /* Botones tipo píldora, más modernos */
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: #468c4a;
+  box-shadow: 0 4px 12px rgba(87, 164, 92, 0.3);
+  transform: scale(1.05);
+}
+
+/* --- ADAPTABILIDAD MÓVIL (Responsivo) --- */
+@media (max-width: 768px) {
+  .tarjeta-trastorno {
+    flex-direction: column; 
+  }
+  
+  .imagen-lado {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .dos-columnas {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Estilos específicos para la página de Profesores */
+
+.texto-solo {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.lista-especial {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.lista-especial li {
+  margin-bottom: 10px;
+  color: #4a6572;
+  font-weight: 500;
+}
+
+.btn-pdf {
+  display: inline-block;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 10px 20px;
+  background-color: #a4d2f7; /* Azul a juego con el header */
+  color: #2c3e50;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+  border: 1px solid #89b8df;
+  transition: 0.3s;
+}
+
+.btn-pdf:hover {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.contenedor-botones-pdf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sintomas {
+  background-color: #f0f4f8;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+/* --- ESTILOS PARA LOGIN Y FORMULARIOS --- */
+
+.body-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-centrado {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-box {
+  max-width: 450px;
+  width: 100%;
+  padding: 10px;
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #4a6572;
+}
+
+.input-group input {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 2px solid #e1e8ed;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  border-color: var(--azul-suave);
+}
+
+.btn-login {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.links-sesion {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.95em;
+}
+
+.links-sesion a {
+  color: #2d98da;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.error-msg {
+  color: #e74c3c;
+  background-color: #fdeaea;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  display: none;
+  text-align: center;
+}
