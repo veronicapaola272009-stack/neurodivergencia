@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentes Extraordinarias - Comentarios</title>
+  <link rel="stylesheet" href="e:\css1\estilo.css">
+  <style>
+    /* Estilo para que el mensaje de éxito no se vea al cargar la página */
+    #mensajeExito {
+      display: none;
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 15px;
+      text-align: center;
+    }
+    /* Estilo opcional para ocultar el mensaje de error por defecto */
+    #errorMsg { display: none; }
+  </style>
+</head>
+<body class="body-login">
+
+  <div class="grid-container login-centrado">
+    <div class="tarjeta-trastorno texto-solo login-box">
+      <div class="texto-centro">
+        <h1 class="titulo-principal">¡Hola, aquí puedes dejar tu comentario sobre nuestra página web!</h1>
+        
+        <form id="comentariosForm" class="formulario-login">
+          <div class="input-group">
+            <label for="username">Nombre</label>
+            <input type="text" id="username" placeholder="Escribe tu nombre" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="comentario">Comentario</label>
+            <input type="text" id="comentario" placeholder="Tu comentario" required>
+          </div>
+
+          <div class="error-msg" id="errorMsg">⚠️ Por favor completa todos los campos</div>
+          
+          <button type="submit" class="btn btn-login">Enviar</button>
+        </form>
+
+        <p id="mensajeExito">¡Enviado con éxito!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Seleccionamos el ID correcto: "comentariosForm"
+    const formulario = document.getElementById('comentariosForm');
+    const mensaje = document.getElementById('mensajeExito');
+    const errorMsg = document.getElementById('errorMsg');
+
+    formulario.addEventListener('submit', function(event) {
+        // 1. Evitamos que la página se recargue
+        event.preventDefault();
+
+        // 2. Ocultamos el mensaje de error si existía
+        errorMsg.style.display = 'none';
+
+        // 3. Mostramos el mensaje de éxito
+        mensaje.style.display = 'block';
+
+        // 4. Limpiamos los campos del formulario
+        formulario.reset();
+
+        // 5. Ocultar el mensaje después de 4 segundos
+        setTimeout(() => {
+            mensaje.style.display = 'none';
+        }, 4000);
+    });
+  </script>
+
+</body>
+</html>
+
