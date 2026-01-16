@@ -1,0 +1,106 @@
+    :root {
+      --claro: #33393b;
+      --medio: #0059b3;
+      --oscuro: #029eff;
+      --texto: #ffffff;
+      --fondo: #000000;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif; 
+      background-color: var(--fondo);
+      color: var(--texto);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--oscuro);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    section {
+      background-color: var(--claro);
+      border-left: 5px solid var(--medio);
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .img {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      gap: 1rem;
+    }
+
+    .bloque {
+      text-align: center;
+    }
+
+    .bloque button {
+      margin-top: 0.5rem;
+      background-color: #74b9ff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .bloque button:hover {
+      background-color: #008fe7;
+    }
+
+    button {
+      background-color: var(--medio);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: var(--oscuro);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--claro);
+      color: var(--texto);
+    }
+
+    .animable {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .animable.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* COLUMNA TEA / TDAH */
+    .dos-columnas {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .columna {
+      flex: 1;
+    }
+

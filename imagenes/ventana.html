@@ -1,0 +1,165 @@
+<!-- =========================
+  Modal Términos y Condiciones
+  Pega este bloque donde quieras (por ejemplo antes de </body>)
+  ========================= -->
+<!-- MARCADO -->
+<div id="tc-modal" class="tc-modal" aria-hidden="true" role="dialog" aria-labelledby="tc-title" aria-describedby="tc-desc">
+  <div class="tc-backdrop" id="tc-backdrop" tabindex="-1"></div>
+
+  <div class="tc-panel" role="document" aria-modal="true">
+    <header class="tc-header">
+      <h2 id="tc-title">Términos y Condiciones</h2>
+      <button id="tc-close" class="tc-close" aria-label="Cerrar términos">✕</button>
+    </header>
+
+    <div class="tc-content" id="tc-desc">
+      <p><strong>Bienvenido a Mentes Extraordinarias.</strong> Al utilizar este sitio, aceptas estos términos y condiciones en su versión vigente.</p>
+
+      <h3>1. Objeto</h3>
+      <p>Estos términos regulan el uso del contenido e información ofrecida en este sitio web, relacionado con salud mental y bienestar.</p>
+
+      <h3>2. Contenido e información</h3>
+      <p>El contenido publicado tiene fines informativos y educativos. No sustituye la consulta profesional médica, psicológica ni terapéutica. Siempre consulta a un profesional para diagnósticos o tratamientos.</p>
+
+      <h3>3. Uso permitido</h3>
+      <p>Queda permitido reproducir fragmentos del contenido para uso personal y no comercial, citando la fuente. Queda prohibida la reproducción total sin autorización.</p>
+
+      <h3>4. Responsabilidad</h3>
+      <p>El propietario del sitio hace esfuerzos por mantener la información actualizada, pero no garantiza la exactitud ni se responsabiliza por decisiones basadas únicamente en la información publicada.</p>
+
+      <h3>5. Enlaces externos</h3>
+      <p>El sitio puede contener enlaces a recursos externos. No se asume responsabilidad por el contenido de terceros.</p>
+
+      <h3>6. Privacidad</h3>
+      <p>El tratamiento de datos personales se regirá por la Política de Privacidad disponible en el sitio. No compartimos información sensible sin tu consentimiento explícito.</p>
+
+      <h3>7. Modificaciones</h3>
+      <p>Nos reservamos el derecho de modificar los términos y condiciones en cualquier momento. Las modificaciones entrarán en vigor desde su publicación en el sitio.</p>
+
+      <h3>8. Contacto</h3>
+      <p>Si tienes dudas sobre estos términos, contáctanos a través de la sección de contacto del sitio.</p>
+
+      <p style="font-size:0.9rem;opacity:0.9">Última actualización: 10 de diciembre de 2025</p>
+    </div>
+
+    <footer class="tc-footer">
+      <label style="display:flex;align-items:center;gap:.5rem;">
+        <input type="checkbox" id="tc-remember"> No mostrar de nuevo (guardar elección)
+      </label>
+      <div style="display:flex;gap:.5rem;">
+        <button id="tc-decline" class="tc-btn">Cerrar</button>
+        <button id="tc-accept" class="tc-btn tc-accept">Aceptar</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- BOTÓN (opcional) -->
+<button id="open-terms" class="tc-open-btn">Términos y Condiciones</button>
+
+<!-- ESTILOS (usa tus variables de :root si las tienes) -->
+<style>
+  .tc-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .tc-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+  }
+  .tc-panel {
+    position: relative;
+    width: min(900px, 95%);
+    max-height: 85vh;
+    overflow: hidden;
+    background: var(--claro, #d0e8f2);
+    border-left: 6px solid var(--medio, #74b9ff);
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    animation: tc-entrar .28s ease-out;
+  }
+  @keyframes tc-entrar { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .tc-header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(90deg, var(--medio, #74b9ff), var(--oscuro, #2d98da));
+    color: white;
+  }
+  .tc-close { background: transparent; border: none; color: white; font-size: 1.05rem; cursor: pointer; }
+  .tc-content { padding: 1rem 1.25rem; overflow: auto; background: white; color: var(--texto, #1e272e); }
+  .tc-content h3 { margin-top: 0.8rem; margin-bottom: 0.3rem; }
+  .tc-footer {
+    padding: 0.75rem 1.25rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: var(--claro, #d0e8f2);
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .tc-btn { background: var(--medio, #74b9ff); color: white; border: none; padding: 0.5rem 0.9rem; border-radius: 6px; cursor: pointer; }
+  .tc-accept { background: var(--oscuro, #2d98da); }
+  .tc-open-btn { background: transparent; border: 1px solid var(--medio, #74b9ff); color: var(--medio, #74b9ff); padding: 0.45rem 0.85rem; border-radius: 6px; cursor: pointer; }
+  @media (max-width: 520px) { .tc-panel { width: 96%; height: 90vh; } }
+</style>
+
+<!-- SCRIPT -->
+<script>
+  (function(){
+    const modal = document.getElementById('tc-modal');
+    const openBtn = document.getElementById('open-terms');
+    const closeBtn = document.getElementById('tc-close');
+    const acceptBtn = document.getElementById('tc-accept');
+    const declineBtn = document.getElementById('tc-decline');
+    const backdrop = document.getElementById('tc-backdrop');
+    const rememberCheckbox = document.getElementById('tc-remember');
+
+    const STORAGE_KEY = 'tc_aceptados_v1';
+
+    function showModal() {
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden', 'false');
+      acceptBtn.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function hideModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    openBtn?.addEventListener('click', showModal);
+    closeBtn?.addEventListener('click', hideModal);
+    declineBtn?.addEventListener('click', hideModal);
+    backdrop?.addEventListener('click', hideModal);
+
+    acceptBtn?.addEventListener('click', () => {
+      if (rememberCheckbox.checked) {
+        try { localStorage.setItem(STORAGE_KEY, 'true'); } catch (e) {}
+      }
+      hideModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') hideModal();
+    });
+
+    try {
+      const previouslyAccepted = localStorage.getItem(STORAGE_KEY) === 'true';
+      if (!previouslyAccepted) setTimeout(showModal, 450);
+    } catch (err) {
+      setTimeout(showModal, 450);
+    }
+  })();
+</script>
