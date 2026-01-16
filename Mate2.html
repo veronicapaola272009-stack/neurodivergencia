@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Ecuaciones Matemáticas</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #eef7f4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .contenedor {
+            max-width: 420px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 22px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #1a535c;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.9rem;
+        }
+
+     
+        .estadisticas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .puntaje,
+        .intentos,
+        .temporizador,
+        .progreso {
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .puntaje {
+            background-color: #fff6d6;
+            color: #8d6e00;
+        }
+
+        .intentos {
+            background-color: #f1e8ff;
+            color: #5e35b1;
+        }
+
+        .temporizador {
+            background-color: #ffecec;
+            color: #ad1457;
+        }
+
+        .progreso {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+        }
+
+        .ecuacion {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            border-radius: 16px;
+        }
+
+
+        .entrada {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 2px solid #b0bec5;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .entrada:focus {
+            border-color: #64b5f6;
+            background-color: #f9fcff;
+        }
+
+
+        .botones {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 16px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #verificarBtn {
+            background-color: #66bb6a;
+            color: white;
+        }
+
+        #verificarBtn:hover {
+            background-color: #43a047;
+            transform: translateY(-2px);
+        }
+
+        #nuevaBtn {
+            background-color: #ffa726;
+            color: white;
+        }
+
+        #nuevaBtn:hover {
+            background-color: #fb8c00;
+            transform: translateY(-2px);
+        }
+
+        #reiniciarBtn {
+            background-color: #7986cb;
+            color: white;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        #reiniciarBtn:hover {
+            background-color: #5c6bc0;
+            transform: translateY(-2px);
+        }
+
+        .mensaje {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 1.1rem;
+            display: none;
+            font-weight: bold;
+        }
+
+        .correcto {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .incorrecto {
+            background-color: #fdecea;
+            color: #c62828;
+        }
+
+        .tiempo-agotado {
+            background-color: #fff8e1;
+            color: #ef6c00;
+        }
+
+
+        .resumen-final {
+            background-color: #f0f4c3;
+            color: #827717;
+            padding: 22px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .resumen-final h2 {
+            margin-bottom: 15px;
+        }
+
+        .resumen-final p {
+            margin: 6px 0;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="contenedor">
+
+      <h1>🤓 Resuelve & Calcula</h1>
+
+      <div class="estadisticas">
+          <div class="puntaje">Puntaje<br><span id="puntaje">0</span></div>
+          <div class="intentos">Intentos<br><span id="intentos">0</span></div>
+          <div class="temporizador">Tiempo<br><span id="tiempo">30</span>s</div>
+          <div class="progreso">Ecuación<br><span id="numEcuacion">1</span>/10</div>
+      </div>
+
+      <div class="ecuacion">
+          ¿Cuánto es?<br>
+          <span id="operacion"></span>
+      </div>
+
+      <input type="number" class="entrada" id="respuesta" placeholder="Escribe tu respuesta">
+
+      <div class="botones">
+          <button id="verificarBtn">Verificar</button>
+          <button id="nuevaBtn">Siguiente</button>
+      </div>
+
+      <button id="reiniciarBtn">Reiniciar Partida</button>
+
+      <div class="mensaje" id="mensaje"></div>
+
+      <div class="resumen-final" id="resumenFinal">
+          <h2>🏁 Partida Finalizada</h2>
+          <p><strong>Puntaje:</strong> <span id="puntajeFinal">0</span></p>
+          <p><strong>Intentos:</strong> <span id="intentosFinal">0</span></p>
+          <p><strong>Aciertos:</strong> <span id="aciertosFinal">0</span></p>
+      </div>
+
+  </div>
+<script>
+    const operacionElement = document.getElementById('operacion');
+    const respuestaInput = document.getElementById('respuesta');
+    const verificarBtn = document.getElementById('verificarBtn');
+    const nuevaBtn = document.getElementById('nuevaBtn');
+    const reiniciarBtn = document.getElementById('reiniciarBtn');
+    const mensajeElement = document.getElementById('mensaje');
+    const puntajeElement = document.getElementById('puntaje');
+    const intentosElement = document.getElementById('intentos');
+    const tiempoElement = document.getElementById('tiempo');
+    const numEcuacionElement = document.getElementById('numEcuacion');
+    const resumenFinalElement = document.getElementById('resumenFinal');
+    const puntajeFinalElement = document.getElementById('puntajeFinal');
+    const intentosFinalElement = document.getElementById('intentosFinal');
+    const aciertosFinalElement = document.getElementById('aciertosFinal');
+
+    let puntaje = 0;
+    let intentos = 0;
+    let resultadoCorrecto = 0;
+    let tiempoRestante = 30;
+    let temporizadorInterval;
+    let numEcuacionActual = 1;
+    let cantidadAciertos = 0;
+    const MAX_ECUACIONES = 10;
+
+    function iniciarTemporizador() {
+        detenerTemporizador();
+        tiempoRestante = 30;
+        tiempoElement.textContent = tiempoRestante;
+
+        temporizadorInterval = setInterval(() => {
+            tiempoRestante--;
+            tiempoElement.textContent = tiempoRestante;
+
+            if (tiempoRestante <= 10) {
+                tiempoElement.style.color = '#d32f2f';
+            } else {
+                tiempoElement.style.color = '#c2185b';
+            }
+
+            if (tiempoRestante <= 0) {
+                detenerTemporizador();
+                tiempoAgotado();
+            }
+        }, 1000);
+    }
+
+    function detenerTemporizador() {
+        clearInterval(temporizadorInterval);
+    }
+
+    function tiempoAgotado() {
+        intentos++;
+        intentosElement.textContent = intentos;
+        mostrarMensaje(
+            `⏰ Tiempo agotado. El resultado era ${resultadoCorrecto}`,
+            'tiempo-agotado'
+        );
+        deshabilitarEntrada();
+        verificarSiguienteEcuacion();
+    }
+
+    function generarEcuacion() {
+        if (numEcuacionActual > MAX_ECUACIONES) {
+            mostrarResumenFinal();
+            return;
+        }
+
+        const operaciones = ['+', '-', '*', '/'];
+        const operacion = operaciones[Math.floor(Math.random() * operaciones.length)];
+        let num1, num2;
+
+        switch (operacion) {
+            case '+':
+                num1 = Math.floor(Math.random() * 50) + 1;
+                num2 = Math.floor(Math.random() * 50) + 1;
+                resultadoCorrecto = num1 + num2;
+                break;
+            case '-':
+                num1 = Math.floor(Math.random() * 50) + 10;
+                num2 = Math.floor(Math.random() * num1) + 1;
+                resultadoCorrecto = num1 - num2;
+                break;
+            case '*':
+                num1 = Math.floor(Math.random() * 12) + 1;
+                num2 = Math.floor(Math.random() * 12) + 1;
+                resultadoCorrecto = num1 * num2;
+                break;
+            case '/':
+                resultadoCorrecto = Math.floor(Math.random() * 12) + 1;
+                num2 = Math.floor(Math.random() * 12) + 1;
+                num1 = resultadoCorrecto * num2;
+                break;
+        }
+
+        operacionElement.textContent = `${num1} ${operacion} ${num2}`;
+        respuestaInput.value = '';
+        respuestaInput.disabled = false;
+        verificarBtn.disabled = false;
+        mensajeElement.style.display = 'none';
+        resumenFinalElement.style.display = 'none';
+        iniciarTemporizador();
+    }
+
+    function verificarRespuesta() {
+        const respuestaUsuario = parseInt(respuestaInput.value);
+
+        if (isNaN(respuestaUsuario)) {
+            mostrarMensaje('⚠️ Escribe un número válido', 'incorrecto');
+            return;
+        }
+
+        detenerTemporizador();
+        intentos++;
+        intentosElement.textContent = intentos;
+
+        if (respuestaUsuario === resultadoCorrecto) {
+            const puntosExtra = Math.floor(tiempoRestante / 5);
+            puntaje += 10 + puntosExtra;
+            cantidadAciertos++;
+            puntajeElement.textContent = puntaje;
+
+            mostrarMensaje(
+                `🎉 ¡Excelente! +${10 + puntosExtra} pts (${puntosExtra} por tiempo)`,
+                'correcto'
+            );
+        } else {
+            mostrarMensaje(
+                `😕 Incorrecto. El resultado es ${resultadoCorrecto}`,
+                'incorrecto'
+            );
+        }
+
+        deshabilitarEntrada();
+        verificarSiguienteEcuacion();
+    }
+
+    function deshabilitarEntrada() {
+        respuestaInput.disabled = true;
+        verificarBtn.disabled = true;
+    }
+
+    function verificarSiguienteEcuacion() {
+        if (numEcuacionActual < MAX_ECUACIONES) {
+            nuevaBtn.textContent = `Siguiente Ecuación (${numEcuacionActual + 1}/${MAX_ECUACIONES})`;
+        } else {
+            nuevaBtn.textContent = 'Finalizar Partida';
+        }
+    }
+
+    function mostrarMensaje(texto, tipo) {
+        mensajeElement.textContent = texto;
+        mensajeElement.className = `mensaje ${tipo}`;
+        mensajeElement.style.display = 'block';
+    }
+
+    function mostrarResumenFinal() {
+        puntajeFinalElement.textContent = puntaje;
+        intentosFinalElement.textContent = intentos;
+        aciertosFinalElement.textContent = cantidadAciertos;
+        resumenFinalElement.style.display = 'block';
+        respuestaInput.disabled = true;
+        verificarBtn.disabled = true;
+        nuevaBtn.disabled = true;
+    }
+
+    function siguienteEcuacion() {
+        numEcuacionActual++;
+        numEcuacionElement.textContent = numEcuacionActual;
+        generarEcuacion();
+    }
+
+    function reiniciarJuego() {
+        puntaje = 0;
+        intentos = 0;
+        cantidadAciertos = 0;
+        numEcuacionActual = 1;
+        puntajeElement.textContent = puntaje;
+        intentosElement.textContent = intentos;
+        numEcuacionElement.textContent = numEcuacionActual;
+        nuevaBtn.disabled = false;
+        generarEcuacion();
+    }
+
+    verificarBtn.addEventListener('click', verificarRespuesta);
+    nuevaBtn.addEventListener('click', siguienteEcuacion);
+    reiniciarBtn.addEventListener('click', reiniciarJuego);
+    respuestaInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') verificarRespuesta();
+    });
+
+    generarEcuacion();
+</script>
+
+</body>
+</html>

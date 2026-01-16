@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntas de HTML y Python</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #eef7f4;
+    }
+
+    h1 {
+        text-align: center;
+        color: #1a535c;
+        margin-bottom: 2rem;
+    }
+
+    .pregunta {
+        background-color: #ffffff;
+        margin-bottom: 2rem;
+        padding: 1.2rem;
+        border-radius: 14px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .codigo {
+        background-color: #f4faff;
+        padding: 1rem;
+        border-radius: 8px;
+        font-family: monospace;
+        margin: 1rem 0;
+        color: #0d47a1;
+    }
+
+    .vacio {
+        background-color: #ffe0e0;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #b71c1c;
+    }
+
+    input[type="text"] {
+        padding: 0.6rem;
+        width: 100%;
+        margin-top: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid #b0bec5;
+        font-size: 1rem;
+    }
+
+    button {
+        margin-top: 0.8rem;
+        padding: 0.6rem 1.2rem;
+        background-color: #66bb6a;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #43a047;
+    }
+
+    .resultado {
+        margin-top: 0.6rem;
+        font-weight: bold;
+    }
+    .bnt-sig{      
+        display: inline-block;
+      text-align: center;
+      padding: 12px 20px;
+      background-color: #4e5dc1; 
+      text-decoration: none; 
+      border-radius: 8px; 
+      font-weight: bold;}
+    .btn-pdf:hover {
+      background-color: #4b61ab;
+    }
+</style>
+</head>
+
+<body>
+
+        <h1>🧩 Preguntas de HTML y Python</h1>
+
+        <div class="pregunta">
+            <h3>1. ¿Qué etiqueta HTML se usa para un encabezado principal?</h3>
+            <div class="codigo">
+                &lt;<span class="vacio">[ETIQUETA]</span>&gt;Título&lt;/<span class="vacio">[ETIQUETA]</span>&gt;
+            </div>
+            <input type="text" id="resp1">
+            <button onclick="comprobar(1, 'h1')">Comprobar</button>
+            <p class="resultado" id="res1"></p>
+        </div>
+
+        <div class="pregunta">
+            <h3>2. ¿Qué etiqueta HTML se usa para crear un enlace?</h3>
+            <div class="codigo">
+                &lt;<span class="vacio">[ETIQUETA]</span> href="pagina.html"&gt;Ir&lt;/<span class="vacio">[ETIQUETA]</span>&gt;
+            </div>
+            <input type="text" id="resp2">
+            <button onclick="comprobar(2, 'a')">Comprobar</button>
+            <p class="resultado" id="res2"></p>
+        </div>
+
+        <div class="pregunta">
+            <h3>3. ¿Qué atributo HTML se usa para mostrar una imagen?</h3>
+            <div class="codigo">
+                &lt;img <span class="vacio">[ATRIBUTO]</span>="foto.jpg"&gt;
+            </div>
+            <input type="text" id="resp3">
+            <button onclick="comprobar(3, 'src')">Comprobar</button>
+            <p class="resultado" id="res3"></p>
+        </div>
+
+        <div class="pregunta">
+            <h3>4. ¿Qué etiqueta HTML se usa para crear un párrafo?</h3>
+            <div class="codigo">
+                &lt;<span class="vacio">[ETIQUETA]</span>&gt;Texto&lt;/<span class="vacio">[ETIQUETA]</span>&gt;
+            </div>
+            <input type="text" id="resp4">
+            <button onclick="comprobar(4, 'p')">Comprobar</button>
+            <p class="resultado" id="res4"></p>
+        </div>
+
+
+
+        <div class="pregunta">
+            <h3>5. ¿Qué palabra se usa en Python para imprimir texto?</h3>
+            <div class="codigo">
+                <span class="vacio">[PALABRA]</span>("Hola")
+            </div>
+            <input type="text" id="resp5">
+            <button onclick="comprobar(5, 'print')">Comprobar</button>
+            <p class="resultado" id="res5"></p>
+        </div>
+
+        <div class="pregunta">
+            <h3>6. ¿Qué palabra se usa en Python para crear una función?</h3>
+            <div class="codigo">
+                <span class="vacio">[PALABRA]</span> mi_funcion():
+            </div>
+            <input type="text" id="resp6">
+            <button onclick="comprobar(6, 'def')">Comprobar</button>
+            <p class="resultado" id="res6"></p>
+        </div>
+
+        <div class="pregunta">
+            <h3>7. ¿Qué palabra se usa en Python para repetir un bloque?</h3>
+            <div class="codigo">
+                <span class="vacio">[PALABRA]</span> i in range(5):
+            </div>
+            <input type="text" id="resp7">
+            <button onclick="comprobar(7, 'for')">Comprobar</button>
+            <p class="resultado" id="res7"></p>
+        </div>
+
+        <script>
+        function comprobar(numPregunta, ...respuestasCorrectas) {
+            const respuestaUsuario =
+                document.getElementById(`resp${numPregunta}`).value.trim().toLowerCase();
+            const resultado =
+                document.getElementById(`res${numPregunta}`);
+
+            if (respuestasCorrectas.includes(respuestaUsuario)) {
+                resultado.textContent = "✅ Respuesta correcta";
+                resultado.style.color = "#2e7d32";
+            } else {
+                resultado.textContent =
+                    `❌ Incorrecto. Respuesta correcta: ${respuestasCorrectas.join(", ")}`;
+                resultado.style.color = "#c62828";
+            }
+        }
+</script>
+        <div>
+            <a class="bnt-sig" href="Programacion2.html">Empezemos el juego</a>
+        </div>
+</body>
+</html> 

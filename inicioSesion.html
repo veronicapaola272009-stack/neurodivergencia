@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentes Extraordinarias - Iniciar Sesión</title>
+  <link rel="stylesheet" href="e:\css1\estilo.css">
+
+</head>
+<body class="body-login">
+
+  <div class="grid-container login-centrado">
+    <div class="tarjeta-trastorno texto-solo login-box">
+      <div class="texto-center">
+        <h1 class="titulo-principal">¡Hola de nuevo!</h1>
+        
+        <form id="loginForm" class="formulario-login">
+          <div class="input-group">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" id="username" placeholder="Escribe tu usuario" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" placeholder="Tu contraseña" required>
+          </div>
+
+          <div class="error-msg" id="errorMsg">⚠️ Por favor completa todos los campos</div>
+          
+          <button type="submit" class="btn btn-login">Ingresar</button>
+        </form>
+
+        <div class="links-sesion">
+          <span>¿No tienes cuenta?</span>
+          <a href="registrarse.html">Crea una aquí</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if(username === "" || password === "") {
+        errorMsg.style.display = "block";
+      } else {
+        errorMsg.style.display = "none";
+        // Redirigir a tu página principal
+        window.location.href = "e:\Proyecto\index.html";
+      }
+    });
+  </script>
+
+</body>
+</html>
+

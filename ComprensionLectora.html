@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprensión Lectora - Neuroamigable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #e8f5e9; /* Fondo verde claro general */
+            color: #2e7d32;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .lectura-contenedor {
+            margin-bottom: 15px;
+            padding: 20px;
+            border: 1px solid #c8e6c9;
+            border-radius: 15px; /* Esquinas más redondeadas */
+            background-color: #f9fff9;
+        }
+        .lectura {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #424242;
+        }
+        .pregunta {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+        .opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .opcion {
+            padding: 10px;
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 10px; /* Esquinas más redondeadas */
+            cursor: pointer;
+            transition: background 0.2s;
+            color: #424242;
+        }
+        .opcion:hover {
+            background: #bbdefb;
+        }
+        .comprobar-btn {
+            padding: 8px 16px;
+            background: #66bb6a;
+            color: white;
+            border: none;
+            border-radius: 10px; /* Esquinas más redondeadas */
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .comprobar-btn:hover {
+            background: #57a45c;
+        }
+        .resultado {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 10px; /* Esquinas más redondeadas */
+            font-weight: bold;
+            display: none;
+        }
+        .correcto {
+            background: #dcedc8;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        .incorrecto {
+            background: #ffebee;
+            color: #b71c1c;
+            border: 1px solid #ef9a9a;
+        }
+    </style>
+</head>
+<body>
+    <header>📚 Comprensión Lectora - Preguntas y Lecturas</header>
+
+    <div class="container">
+        <!-- Lectura 1 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">El conejo Luna vivía en un jardín lleno de flores de colores. Todos los días, salía a buscar zanahorias y compartía con sus amigos el pájaro Piolín y la tortuga Toto. Un día, encontraron una caja misteriosa bajo un árbol. Dentro había una carta que decía: "Para quienes aman compartir, un regalo de alegría".</div>
+            <div class="pregunta">1. ¿Qué encontraron los amigos bajo un árbol?</div>
+            <div class="opciones" data-respuesta-correcta="2">
+                <div class="opcion" data-valor="1">Un conejo nuevo</div>
+                <div class="opcion" data-valor="2">Una caja misteriosa</div>
+                <div class="opcion" data-valor="3">Una zanahoria gigante</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 2 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">María tiene una tienda de libros pequeños en el centro. Todos los sábados, organiza talleres de lectura para niños. El sábado pasado, vinieron 15 niños y leyeron cuentos de animales. María regaló un libro a cada niño que participó.</div>
+            <div class="pregunta">2. ¿Cuántos niños vinieron al taller el sábado pasado?</div>
+            <div class="opciones" data-respuesta-correcta="3">
+                <div class="opcion" data-valor="1">10</div>
+                <div class="opcion" data-valor="2">12</div>
+                <div class="opcion" data-valor="3">15</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 3 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">El barco "Estrella del Mar" zarparon desde el puerto hacia la isla del Sol. Llevaban comida y medicinas para los habitantes. El viaje duró tres días y llegaron sin problemas.</div>
+            <div class="pregunta">3. ¿Hacia dónde zarparon el barco?</div>
+            <div class="opciones" data-respuesta-correcta="1">
+                <div class="opcion" data-valor="1">Isla del Sol</div>
+                <div class="opcion" data-valor="2">Puerto del Norte</div>
+                <div class="opcion" data-valor="3">Bahía Azul</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 4 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">El perro Max ama jugar con su pelota roja. Cada tarde, su dueño lo lleva al parque. Ayer, perdió la pelota en el césped, pero un niño se la encontró y se la devolvió.</div>
+            <div class="pregunta">4. ¿De qué color era la pelota de Max?</div>
+            <div class="opciones" data-respuesta-correcta="2">
+                <div class="opcion" data-valor="1">Azul</div>
+                <div class="opcion" data-valor="2">Rojo</div>
+                <div class="opcion" data-valor="3">Amarillo</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 5 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">Ana estudia matemáticas en la universidad. Todos los días, toma el autobús a las 8 de la mañana. El martes pasado, el autobús se retrasó por la lluvia, así que llegó tarde a clase.</div>
+            <div class="pregunta">5. ¿Por qué llegó Ana tarde a clase el martes?</div>
+            <div class="opciones" data-respuesta-correcta="1">
+                <div class="opcion" data-valor="1">El autobús se retrasó por la lluvia</div>
+                <div class="opcion" data-valor="2">Olvidó sus libros</div>
+                <div class="opcion" data-valor="3">Se levantó tarde</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 6 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">El museo de historia abrió sus puertas en 1920. Tiene colecciones de herramientas antiguas y pinturas coloniales. Cada domingo, la entrada es gratuita para mayores de 60 años.</div>
+            <div class="pregunta">6. ¿Cuándo es gratuita la entrada para mayores de 60 años?</div>
+            <div class="opciones" data-respuesta-correcta="3">
+                <div class="opcion" data-valor="1">Lunes</div>
+                <div class="opcion" data-valor="2">Viernes</div>
+                <div class="opcion" data-valor="3">Domingo</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 7 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">La planta de tomates en el huerto creció mucho este año. Pedro cosechó 20 kilos y los vendió en el mercado. Usó el dinero para comprar semillas nuevas.</div>
+            <div class="pregunta">7. ¿Cuántos kilos de tomates cosechó Pedro?</div>
+            <div class="opciones" data-respuesta-correcta="2">
+                <div class="opcion" data-valor="1">15</div>
+                <div class="opcion" data-valor="2">20</div>
+                <div class="opcion" data-valor="3">25</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 8 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">El tren de la ciudad pasa por 10 estaciones. Sale de la estación principal a las 7 de la mañana y llega a la última estación a las 8:30. Muchos trabajadores lo usan para ir al trabajo.</div>
+            <div class="pregunta">8. ¿Cuántas estaciones pasa el tren?</div>
+            <div class="opciones" data-respuesta-correcta="1">
+                <div class="opcion" data-valor="1">10</div>
+                <div class="opcion" data-valor="2">8</div>
+                <div class="opcion" data-valor="3">12</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 9 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">Lucía aprendió a tocar la guitarra cuando tenía 10 años. Ahora, tiene 16 y toca en una banda con sus amigos. El viernes que viene, tienen su primer concierto en el club de la ciudad.</div>
+            <div class="pregunta">9. ¿Cuándo tendrá la banda su primer concierto?</div>
+            <div class="opciones" data-respuesta-correcta="3">
+                <div class="opcion" data-valor="1">Este viernes</div>
+                <div class="opcion" data-valor="2">El sábado que viene</div>
+                <div class="opcion" data-valor="3">El viernes que viene</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+
+        <!-- Lectura 10 -->
+        <div class="lectura-contenedor">
+            <div class="lectura">El lago Verde tiene muchos peces y patos. Cada verano, muchas familias van a nadar y hacer picnic. El año pasado, se construyó un muelle nuevo para poder pescar con seguridad.</div>
+            <div class="pregunta">10. ¿Qué se construyó el año pasado en el lago Verde?</div>
+            <div class="opciones" data-respuesta-correcta="2">
+                <div class="opcion" data-valor="1">Una casa de picnic</div>
+                <div class="opcion" data-valor="2">Un muelle nuevo</div>
+                <div class="opcion" data-valor="3">Un parque infantil</div>
+            </div>
+            <button class="comprobar-btn">Comprobar</button>
+            <div class="resultado"></div>
+        </div>
+    </div>
+
+    <script>
+        // Seleccionar todos los botones y contenedores
+        const botones = document.querySelectorAll('.comprobar-btn');
+
+        botones.forEach(boton => {
+            boton.addEventListener('click', () => {
+                const contenedor = boton.parentElement;
+                const opciones = contenedor.querySelectorAll('.opcion');
+                const resultado = contenedor.querySelector('.resultado');
+                const respuestaCorrecta = contenedor.querySelector('.opciones').dataset.respuestaCorrecta;
+                let opcionSeleccionada = null;
+
+                // Encontrar opción seleccionada
+                opciones.forEach(opcion => {
+                    if (opcion.style.background === 'rgb(187, 222, 251)') { // Color de selección
+                        opcionSeleccionada = opcion.dataset.valor;
+                    }
+                });
+
+                // Mostrar resultado
+                resultado.style.display = 'block';
+                if (opcionSeleccionada === respuestaCorrecta) {
+                    resultado.textContent = '✅ ¡Respuesta correcta!';
+                    resultado.className = 'resultado correcto';
+                } else {
+                    resultado.textContent = `❌ ¡Respuesta incorrecta! La respuesta correcta es la opción ${respuestaCorrecta}.`;
+                    resultado.className = 'resultado incorrecto';
+                }
+            });
+
+            // Agregar evento de selección a opciones
+            const opciones = boton.parentElement.querySelectorAll('.opcion');
+            opciones.forEach(opcion => {
+                opcion.addEventListener('click', () => {
+                    // Quitar selección anterior
+                    opciones.forEach(o => o.style.background = '');
+                    // Marcar opción seleccionada
+                    opcion.style.background = '#bbdefb';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

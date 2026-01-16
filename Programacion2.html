@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprende Programación – Niveles</title>
+
+<style>
+*{
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background-color:#f5f7fa;
+    padding:20px;
+    display:flex;
+    justify-content:center;
+}
+
+.contenedor{
+    background:white;
+    max-width:750px;
+    width:100%;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#34495e;
+    margin-bottom:10px;
+}
+
+.subtitulo{
+    text-align:center;
+    color:#555;
+    margin-bottom:20px;
+}
+
+.barra{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+    font-weight:bold;
+    color:#2c3e50;
+}
+
+.pregunta{
+    background:#eef2f7;
+    padding:20px;
+    border-radius:12px;
+}
+
+.opciones{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:15px;
+}
+
+button{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.opcion{
+    background:#dbeafe;
+    color:#1e3a8a;
+}
+
+.opcion:hover{
+    background:#bfdbfe;
+}
+
+.correcto{
+    background:#c7f9cc !important;
+    color:#14532d;
+}
+
+.incorrecto{
+    background:#fecaca !important;
+    color:#7f1d1d;
+}
+
+.feedback{
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    display:none;
+    font-weight:bold;
+}
+
+.feedback.ok{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.feedback.error{
+    background:#fee2e2;
+    color:#7f1d1d;
+}
+
+.siguiente{
+    margin-top:15px;
+    background:#22c55e;
+    color:white;
+    display:none;
+}
+
+.reiniciar{
+    margin-top:20px;
+    background:#6366f1;
+    color:white;
+    width:100%;
+}
+
+.resumen{
+    display:none;
+    text-align:center;
+}
+
+.resumen h2{
+    color:#1f2937;
+    margin-bottom:10px;
+}
+
+.mensaje-apoyo{
+    background:#fef9c3;
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+    color:#713f12;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="contenedor">
+
+<h1>🧠 Aprende Programación</h1>
+<p class="subtitulo">HTML y Python – 10 niveles</p>
+
+<div class="barra">
+    <div>Nivel: <span id="nivel">1</span>/10</div>
+    <div>Puntaje: <span id="puntaje">0</span></div>
+</div>
+
+<div class="pregunta" id="contenedorPregunta">
+    <h3 id="textoPregunta"></h3>
+
+    <div class="opciones" id="opciones"></div>
+
+    <div class="feedback" id="feedback"></div>
+
+    <button class="siguiente" id="btnSiguiente" onclick="siguienteNivel()">Siguiente nivel</button>
+</div>
+
+<div class="resumen" id="resumen">
+    <h2>🎉 ¡Actividad finalizada!</h2>
+    <p><strong>Puntaje final:</strong> <span id="puntajeFinal"></span>/100</p>
+
+    <div class="mensaje-apoyo">
+        🌟 ¡Muy bien hecho! Aprender programación lleva tiempo y paciencia.  
+        Cada error es una oportunidad para aprender algo nuevo.  
+        Sigue practicando, ¡vas por muy buen camino! 💙
+    </div>
+
+    <button class="reiniciar" onclick="reiniciar()">🔄 Reiniciar actividad</button>
+</div>
+
+</div>
+
+<script>
+const preguntas = [
+{p:"¿Qué etiqueta HTML se usa para un título principal?", o:["<p>","<h1>","<title>"], c:1},
+{p:"¿Qué etiqueta HTML crea un enlace?", o:["<a>","<link>","<href>"], c:0},
+{p:"¿Qué atributo se usa para poner una imagen?", o:["src","href","img"], c:0},
+{p:"¿Cómo se escribe un comentario en HTML?", o:["// comentario","<!-- comentario -->","# comentario"], c:1},
+{p:"¿Qué etiqueta se usa para listas ordenadas?", o:["<ul>","<ol>","<li>"], c:1},
+{p:"¿Cómo se imprime algo en Python?", o:["echo()","print()","write()"], c:1},
+{p:"¿Cómo se crea una variable en Python?", o:["var x=5","x=5","int x=5"], c:1},
+{p:"¿Qué tipo de dato es 'Hola' en Python?", o:["Número","Booleano","Texto"], c:2},
+{p:"¿Qué significa if en Python?", o:["Repetir","Decidir","Guardar"], c:1},
+{p:"¿Qué valor representa verdadero en Python?", o:["true","True","verdad"], c:1}
+];
+
+let nivelActual = 0;
+let puntaje = 0;
+
+const textoPregunta = document.getElementById("textoPregunta");
+const opcionesDiv = document.getElementById("opciones");
+const feedback = document.getElementById("feedback");
+const btnSiguiente = document.getElementById("btnSiguiente");
+
+function cargarPregunta(){
+    const q = preguntas[nivelActual];
+    textoPregunta.textContent = q.p;
+    opcionesDiv.innerHTML = "";
+    feedback.style.display="none";
+    btnSiguiente.style.display="none";
+
+    document.getElementById("nivel").textContent = nivelActual+1;
+    document.getElementById("puntaje").textContent = puntaje;
+
+    q.o.forEach((opcion,i)=>{
+        const btn = document.createElement("button");
+        btn.textContent = opcion;
+        btn.className="opcion";
+        btn.onclick=()=>verificar(i,btn);
+        opcionesDiv.appendChild(btn);
+    });
+}
+
+function verificar(indice,boton){
+    const correcta = preguntas[nivelActual].c;
+    document.querySelectorAll(".opcion").forEach(b=>b.disabled=true);
+
+    if(indice===correcta){
+        boton.classList.add("correcto");
+        feedback.textContent="✅ ¡Correcto! Sigue así.";
+        feedback.className="feedback ok";
+        puntaje+=10;
+    }else{
+        boton.classList.add("incorrecto");
+        feedback.textContent="❌ No pasa nada, aprender también es equivocarse.";
+        feedback.className="feedback error";
+    }
+    feedback.style.display="block";
+    btnSiguiente.style.display="block";
+}
+
+function siguienteNivel(){
+    nivelActual++;
+    if(nivelActual<10){
+        cargarPregunta();
+    }else{
+        document.getElementById("contenedorPregunta").style.display="none";
+        document.getElementById("resumen").style.display="block";
+        document.getElementById("puntajeFinal").textContent = puntaje;
+    }
+}
+
+function reiniciar(){
+    nivelActual=0;
+    puntaje=0;
+    document.getElementById("resumen").style.display="none";
+    document.getElementById("contenedorPregunta").style.display="block";
+    cargarPregunta();
+}
+
+cargarPregunta();
+</script>
+
+</body>
+</html>
